@@ -13,6 +13,7 @@ export default function PlaygroundSlides() {
   const handle = useFullScreenHandle();
   const [slideVisibleIndex, setSlideVisibleIndex] = useState(0);
   const [slideData, setSlideData] = useState("");
+  const [selectedFont, setSelectedFont] = useState("Roboto");
 
   useEffect(() => {
     const data = localStorage.getItem("@playground:text");
@@ -48,7 +49,9 @@ export default function PlaygroundSlides() {
 
   if (hasText) {
     slides = (
-      <Slide isFull={handle.active}>{slideData[slideVisibleIndex]}</Slide>
+      <Slide isFull={handle.active} font={selectedFont}>
+        {slideData[slideVisibleIndex]}
+      </Slide>
     );
   }
 
@@ -63,6 +66,8 @@ export default function PlaygroundSlides() {
           handlePreviousSlide={handlePreviousSlide}
           slideVisibleIndex={slideVisibleIndex}
           slideDataLength={slideData.length}
+          selectedFont={selectedFont}
+          setSelectedFont={setSelectedFont}
         />
       )}
 
